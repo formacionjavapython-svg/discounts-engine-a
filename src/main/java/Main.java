@@ -127,13 +127,9 @@ public class Main {
         System.out.println("\n=== Probando validacion de cupones ===");
         
         CouponDiscount cuponRule = (CouponDiscount) rules2.get(1);
-        
-        // Probando con cupón correcto
-        String cuponCorrecto = "SUPER2024";
-        boolean resultado1 = cuponRule.validarCupon(cuponCorrecto);
-        System.out.println("Cupon '" + cuponCorrecto + "' = " + resultado1);
-        
-        // Probando con cupón incorrecto
+                
+        // Probando con cupón incorrecto (se probo en locar la validacion de correcto
+        // aqui para el repositorio remoto solo se muestra este para no revelar el correcto)
         String cuponIncorrecto = "OTRO2024";
         boolean resultado2 = cuponRule.validarCupon(cuponIncorrecto);
         System.out.println("Cupon '" + cuponIncorrecto + "' = " + resultado2);
