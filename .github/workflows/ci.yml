@@ -1,0 +1,36 @@
+name: ci.yml
+on:
+  push:
+    branches: [ main, jose-domingo-hernandez-herrera ]
+    pull_request:
+      branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with javac
+        run: |
+          mkdir -p out
+          javac -d out -cp src/main/java src/main/java/**/*.java
+
+      - name: Run TestRunner
+        env:
+          DISCOUNT_COUPON_SECRET: ${{ secrets.DISCOUNT_COUPON_SECRET }}
+        run: |
+          javac -d out -cp src/main/java src/main/java/test/TestRunner.java
+          java -cp out test.TestRunner
+
+      - name: Check Quality (Checkstyle)
+        run: |
+          bash scripts/checkstyle.sh

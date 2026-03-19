@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // se crea el carrito
-        Cart cart = new Cart("HOLA2026"); // se crea un carrito agregando un cupon de descuento
+        Cart cart = new Cart("SUPER2024"); // se crea un carrito agregando un cupon de descuento
 
         // se crean articulos y se añaden al carrito
         cart.addItem(new Item("Laptop", new Money(new BigDecimal("15000.00"), "MXN"), 1));
