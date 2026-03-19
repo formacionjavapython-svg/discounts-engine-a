@@ -9,7 +9,7 @@ public class Item {
     private final int quantity;
 
     public Item(String name, Money unitPrice, int quantity) {
-        // Se hacen validaciones del nobre, precio unitario y cantidad
+        // Se hacen validaciones del nobre, precio unitario y cantidad de articulos
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre del producto es requerido");
         }
@@ -38,9 +38,7 @@ public class Item {
         return quantity;
     }
 
-    /**
-     * Calcula el subtotal = precio unitario * cantidad
-    */
+    /* Calcula el subtotal = precio unitario * cantidad   */
     public Money getSubtotal() {
         int subtotalAmount = unitPrice.getAmount() * quantity;
         return new Money(subtotalAmount, unitPrice.getCurrency());

@@ -1,7 +1,11 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
 
+        System.out.println("///////////////////////////////////////////////////////////////////////////////");
         System.out.println("=== Motor de Descuentos ===\n");
         
         // 1. Crear algunos precios (Money)
@@ -41,5 +45,48 @@ public class Main {
         System.out.println("Items en carrito ahora: " + cart.getItemCount());
         System.out.println("Nuevo total: $" + cart.getTotal().getAmount() + 
                          " " + cart.getTotal().getCurrency());
+
+        System.out.println("///////////////////////////////////////////////////////////////////////////////");
+        System.out.println("=== Motor de Descuentos - Reglas de descuento ===\n");
+        
+        // 1. Se crea un carrito con productos
+        Cart cart2 = new Cart();
+        
+        // Agregamos productos para que el total sea mayor a $5000
+        cart2.addItem(new Item("Laptop", new Money(15000, "MXN"), 1));
+        cart2.addItem(new Item("Mouse", new Money(500, "MXN"), 2));
+        cart2.addItem(new Item("Teclado", new Money(800, "MXN"), 1));
+        
+        System.out.println("Carrito original:");
+        System.out.println(cart2.getTotal().getAmount() + " " + cart2.getTotal().getCurrency());
+        
+        // 2. Se crean las reglas de descuento ( 10% si compra mas de $5000 y cupon de descuento $200 pesitos)
+        List<DiscountRule> rules = Arrays.asList(
+            new ThresholdDiscount(5000, 0.10),  
+            new CouponDiscount(200)              
+        );
+        
+        // 3. Se aplica una cadena de reglas 
+        System.out.println("\n=== Aplicando descuentos ===");
+        
+        Money descuentoTotal = new Money(0, "MXN");
+        
+        for (DiscountRule rule : rules) {
+            Money descuento = rule.apply(cart2);
+            System.out.println("Regla: " + rule.getClass().getSimpleName() + 
+                             " - Descuento: $" + descuento.getAmount());
+            
+           
+            descuentoTotal = descuentoTotal.add(descuento);
+        }
+        
+        // 4. Se muestran resultados finales
+        System.out.println("\n=== Resultados finales ===");
+        System.out.println("Total original: $" + cart2.getTotal().getAmount());
+        System.out.println("Descuento total: $" + descuentoTotal.getAmount());
+        
+        Money totalFinal = cart2.getTotal().subtract(descuentoTotal);
+        System.out.println("Total a pagar: $" + totalFinal.getAmount());
+       
     }
 }
