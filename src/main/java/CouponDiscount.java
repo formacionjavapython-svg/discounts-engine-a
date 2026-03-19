@@ -1,12 +1,11 @@
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 public class CouponDiscount implements DiscountRule {
-    private final String expectedCode;
     private final String providedCode;
     private final Money discountAmount;
 
-    public CouponDiscount(String expectedCode, String providedCode, Money discountAmount) {
-        if (expectedCode == null || expectedCode.isBlank()) {
-            throw new IllegalArgumentException("expectedCode es obligatorio");
-        }
+    public CouponDiscount(String providedCode, Money discountAmount) {
         if (providedCode == null || providedCode.isBlank()) {
             throw new IllegalArgumentException("providedCode es obligatorio");
         }
@@ -14,7 +13,6 @@ public class CouponDiscount implements DiscountRule {
             throw new IllegalArgumentException("discountAmount es obligatorio");
         }
 
-        this.expectedCode = expectedCode;
         this.providedCode = providedCode;
         this.discountAmount = discountAmount;
     }
@@ -22,11 +20,20 @@ public class CouponDiscount implements DiscountRule {
     @Override
     public Money apply(Cart cart) {
         Money total = cart.total();
+        String secret = System.getenv("DISCOUNT_COUPON_SECRET");
 
-        if (expectedCode.equals(providedCode)) {
-            if (!discountAmount.getCurrency().equals(total.getCurrency())) {
-                throw new IllegalArgumentException("la moneda del cupón no coincide con la del carrito");
-            }
+        if (secret == null || secret.isBlank()) {
+            return new Money(0, total.getCurrency());
+        }
+
+        if (!discountAmount.getCurrency().equals(total.getCurrency())) {
+            throw new IllegalArgumentException("la moneda del cupón no coincide con la del carrito");
+        }
+
+        byte[] providedBytes = providedCode.getBytes(StandardCharsets.UTF_8);
+        byte[] secretBytes = secret.getBytes(StandardCharsets.UTF_8);
+
+        if (MessageDigest.isEqual(providedBytes, secretBytes)) {
             return discountAmount;
         }
 

@@ -12,7 +12,6 @@ public class Main {
 
         DiscountRule couponDiscount = new CouponDiscount(
                 "PROMO10",
-                "PROMO10",
                 new Money(1000, "MXN")
         );
 
