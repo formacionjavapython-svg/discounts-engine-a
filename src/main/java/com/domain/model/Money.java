@@ -34,6 +34,13 @@ public class Money
         return new Money(this.amount - other.amount, this.currency);
     }
 
+    public Money multiply(double factor)
+    {
+        if(factor < 0) throw new IllegalArgumentException("Factor cannot be negative");
+
+        return new Money(this.amount * factor, this.currency);
+    }
+
     @Override
     public String toString()
     {
