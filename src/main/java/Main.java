@@ -12,7 +12,7 @@ public class Main {
 
         List<DiscountRule> rules = Arrays.asList(
             new ThresholdDiscount(5000, 0.10), // 10% por compra > 5000
-            new CouponDiscount(),              // Descuento fijo de cupón
+            new CouponDiscount("SUPER2024", 100.0),              // Descuento de cupón protegido
             new BulkDiscount(3, 0.05)          // 5% en productos con 3+ unidades
         );
 

@@ -1,23 +1,30 @@
 package main.java;
 
+import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
+
 public class CouponDiscount implements DiscountRule {
-    private String couponCode;
+    private String userProvidedCode;
     private double discountAmount;
 
-    public CouponDiscount() {
-        this.couponCode = "GENERICO";
-        this.discountAmount = 50.0; // Un descuento base
-    }
-
-    public CouponDiscount(String code, double amount) {
-        this.couponCode = code;
+    public CouponDiscount(String userProvidedCode, double amount) {
+        this.userProvidedCode = userProvidedCode;
         this.discountAmount = amount;
     }
 
     @Override
     public double apply(Cart cart) {
-        // En un caso real, aquí validaríamos si el cupón es válido
-        // Por ahora, si el carrito no está vacío, aplicamos el descuento fijo
-        return cart.getTotal() > 0 ? discountAmount : 0.0;
+
+        String realSecret = System.getenv("DISCOUNT_COUPON_SECRET");
+
+        if (realSecret == null || userProvidedCode == null) {
+            return 0.0;
+        }
+
+        boolean isValid = MessageDigest.isEqual(
+                realSecret.getBytes(StandardCharsets.UTF_8),
+                userProvidedCode.getBytes(StandardCharsets.UTF_8));
+
+        return isValid ? discountAmount : 0.0;
     }
 }
