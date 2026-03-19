@@ -1,7 +1,10 @@
 package services;
 
+import models.Cart;
+import models.Money;
+
 public interface DiscountRule {
 
-    float apply(float amount);
+    Money apply(Cart cart);
 
 }

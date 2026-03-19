@@ -1,4 +1,6 @@
 import ioc.Ioc;
+import models.Item;
+import models.Money;
 
 import java.util.Scanner;
 
@@ -6,31 +8,20 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        boolean exit = false;
-        while (!exit) {
-            System.out.println("---------- BIENVENIDO -----------");
-            System.out.println(" Operacion a realizar: \n 1.- Agregar Item \n 2.- Elimanar Item \n 3.- Ingresar Cupon \n 4.- Terminar Compra \n 5.- Salir");
-            try {
-                int operation = sc.nextInt();
-                switch (operation) {
-                    case 1:
-                        Ioc.motorDescuento.agregarItems(sc);
-                        break;
-                    case 2:
-                        Ioc.motorDescuento.eliminarItem(sc);
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        exit = true;
-                }
-            }catch (Exception e){
-                System.out.println("Operacion no soportada!");
-            }
-        }
+        Item item1 = new Item("Laptop", new Money(10000, "MXN"), 2);
+        Item item2 = new Item("Celular", new Money(8000, "MXN"), 1);
+        Item item3 = new Item("TV", new Money(5000, "MXN"), 9);
 
+        Ioc.cartSale.addItem(item1);
+        Ioc.cartSale.addItem(item2);
+        Ioc.cartSale.removeItem(item3);
+
+//        Money descuentoThreshold = Ioc.rules.get("threshold").apply(Ioc.cartSale);
+//        Ioc.cartSale = Ioc.cartSale.applyDiscount(descuentoThreshold);
+
+        Money descuentoCoupon = Ioc.rules.get("coupon").apply(Ioc.cartSale);
+        Ioc.cartSale = Ioc.cartSale.applyDiscount(descuentoCoupon);
+        System.out.println("Total a pagar con descuento: "+ Ioc.cartSale.getMoney().getMoney());
+        System.out.println("Descuento aplicado: "+descuentoCoupon.getMoney());
     }
 }

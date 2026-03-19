@@ -6,19 +6,20 @@ public class Money {
     private float money;
     private String type;
 
-    public Money(float money){
-        this.money = money;
-    }
+    public Money() {}
+
 
     public Money(float money, String type) {
         this.money = money;
     }
 
-    public float applyDiscount(Cart cart, DiscountRule rule){
-        if (rule)
+    public Money sumarMoney(Money moneyMore){
+        return new Money(this.money + moneyMore.getMoney(), this.getType());
     }
 
-
+    public Money restarMoney(Money moneyMore){
+        return new Money(this.money - moneyMore.getMoney(), this.getType());
+    }
     public float getMoney() {
         return money;
     }

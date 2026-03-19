@@ -7,8 +7,8 @@ import models.Money;
 import java.util.Scanner;
 
 public class MotorDescuento {
-
-    public void agregarItems(Scanner sc){
+    public void agregarItems(){
+        Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println(" - Nombre del producto > ");
             String name = sc.nextLine();
@@ -20,13 +20,15 @@ public class MotorDescuento {
             Item item = new Item(name, priceForItem, quantity);
             Ioc.cartSale.addItem(item);
             System.out.println(" Agregar un nuevo item de compra: y/n");
-            if (!sc.next().equals("n")) {
+            if (sc.next().equals("n")) {
                 break;
             }
         }
+        sc.close();
     }
 
-    public void eliminarItem(Scanner sc){
+    public void eliminarItem(){
+        Scanner sc = new Scanner(System.in);
         System.out.println(" - Nombre del producto a eliminar > ");
         String name = sc.nextLine();
         for( Item item : Ioc.cartSale.getItems()){
@@ -34,12 +36,13 @@ public class MotorDescuento {
                 Ioc.cartSale.removeItem(item);
             }
         }
-
+        sc.close();
     }
 
-    public void addCoupon(Scanner sc){
-        System.out.println(" - Ingresa el cupon > ");
-        String cupon = sc.nextLine();
-
+    public void makeSale(){
+        Money descuentoThreshold = Ioc.rules.get("threshold").apply(Ioc.cartSale);
+        Ioc.cartSale.applyDiscount(descuentoThreshold);
+        System.out.println("Total a pagar con descuento: "+ Ioc.cartSale.getMoney());
+        System.out.println("Descuento aplicado: "+descuentoThreshold.getMoney());
     }
 }

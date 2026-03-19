@@ -7,10 +7,12 @@ public class Item {
 
     public Item(String name, Money money, float cantidad) {
         this.name = name;
+        this.price = money;
+        this.quantity = cantidad;
     }
 
-    public float calculateSubtotal(){
-        return price.getMoney() * quantity;
+    public Money calculateSubtotal(){
+        return new Money(price.getMoney() * quantity, "MXN");
     }
 
     public String getName() {

@@ -6,9 +6,11 @@ import java.util.List;
 public class Cart {
 
     private List<Item> itemsOnCart;
+    private Money money;
 
     public Cart(){
         itemsOnCart = new ArrayList<>();
+        this.money = new Money(0, "MXN");
     }
 
     public List<Item> getItems() {
@@ -17,17 +19,27 @@ public class Cart {
 
     public void addItem(Item item) {
         this.itemsOnCart.add(item);
+        this.money = calculateAmount();
     }
 
     public void removeItem(Item item) {
         this.itemsOnCart.remove(item);
     }
 
-    public float calculateAmount() {
-        float amount = 0;
+    public Money calculateAmount() {
+        Money amount = new Money(0, "MXN");
         for (Item item : itemsOnCart) {
-            amount += item.calculateSubtotal();
+            amount = amount.sumarMoney(item.calculateSubtotal());
         }
         return amount;
+    }
+
+    public Cart applyDiscount(Money descuento) {
+        this.money = this.money.restarMoney(descuento);
+        return this;
+    }
+
+    public Money getMoney() {
+        return this.money;
     }
 }
