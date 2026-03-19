@@ -2,7 +2,7 @@ name: Java CI Pipeline
 
 on:
   push:
-    branches: [ "**" ]
+    branches: [ "jose-domingo-hernandez-herrea" ]
   pull_request:
     branches: [ "main" ]
 
