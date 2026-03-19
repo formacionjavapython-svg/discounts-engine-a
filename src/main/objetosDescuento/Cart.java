@@ -14,8 +14,8 @@ public void deleteItem(Item item) {
 }
 public Money calculateTotal(){
     Money total= new Money(0,"MXN");
-    for (Item a: Items) {
-        Money subtotalDelItem= a.calcularSubtotal();
+    for (Item a: items) {
+        Money subtotalDelItem= a.calculateSubtotal();
         total = total.sumar(subtotalDelItem)
     }
     return total;

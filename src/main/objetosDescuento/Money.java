@@ -23,7 +23,7 @@ public class Money {
         double newAmount = this.amount * multiplicator;
         return new Money(newAmount, this.currency);
     }
-    public Money summar(double amount){
+    public Money sumar(Money otroMonto{
         return new Money(this.amount + amount, this.currency);
 
     }
