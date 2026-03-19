@@ -1,3 +1,5 @@
+package src.main.java;
+
 //Money.java
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -69,8 +71,8 @@ public class Money {
         return new Money(this.monto.subtract(dinero.monto),this.moneda);
     }
 
-    public Money multiplica(Money dinero){
-        return new Money(this.monto.multiply(dinero.monto),this.moneda);
+    public Money multiplica(BigDecimal factor){
+        return new Money(this.monto.multiply(factor),this.moneda);
     }
 
 
