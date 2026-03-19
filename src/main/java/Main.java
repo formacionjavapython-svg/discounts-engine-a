@@ -1,4 +1,6 @@
-import model.*;
+import model.Cart;
+import model.Item;
+import model.Money;
 import service.impl.CouponIDiscount;
 import service.IDiscountRule;
 import service.impl.ThresholdIDiscount;
