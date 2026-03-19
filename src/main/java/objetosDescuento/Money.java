@@ -1,4 +1,4 @@
-package main.objetosDescuento;
+package objetosDescuento;
 public class Money {
 
     private double amount;
@@ -23,8 +23,8 @@ public class Money {
         double newAmount = this.amount * multiplicator;
         return new Money(newAmount, this.currency);
     }
-    public Money sumar(Money otroMonto{
-        return new Money(this.amount + amount, this.currency);
+    public Money sumar(Money otroMonto){
+        return new Money(this.amount + otroMonto.getAmount(), this.currency);
 
     }
 }

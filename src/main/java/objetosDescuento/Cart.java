@@ -1,8 +1,8 @@
-package main.objetosDescuento;
+package objetosDescuento;
 import java.util.ArrayList;
 import java.util.List;
 
-class Cart {
+public class Cart {
 
 private List<Item> items = new ArrayList<>();
 
@@ -16,7 +16,7 @@ public Money calculateTotal(){
     Money total= new Money(0,"MXN");
     for (Item a: items) {
         Money subtotalDelItem= a.calculateSubtotal();
-        total = total.sumar(subtotalDelItem)
+        total = total.sumar(subtotalDelItem);
     }
     return total;
 }

@@ -1,4 +1,4 @@
-package main.objetosDescuento;
+package objetosDescuento;
 public class Item {
 
     private String name;
