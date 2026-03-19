@@ -1,7 +1,37 @@
+package model;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
-
     public static void main(String[] args) {
-        System.out.println("Hola mundo Axity");
-    }
+        // se crea el carrito
+        Cart cart = new Cart();
 
+        // se crean articulos y se añaden al carrito
+        cart.addItem(new Item("Laptop", new Money(new BigDecimal("15000.00"), "MXN"), 1));
+        cart.addItem(new Item("Mouse", new Money(new BigDecimal("500.00"), "MXN"), 2));
+
+        // se verifica el total antes de descuento
+        Money totalBeforeDiscount = cart.calculateTotal();
+        System.out.println("Total antes de descuentos: " + totalBeforeDiscount.amount() + " " + totalBeforeDiscount.currency());
+
+        List<DiscountRule> rules = Arrays.asList(
+                new ThresholdDiscount(), // Descuento si supera 5000
+                new CouponDiscount()      // Descuento de cupón fijo
+        );
+
+        // verificamos el total del descuento
+        Money totalDiscount = rules.stream()
+                .map(rule -> rule.apply(cart)) // Aquí aplicamos cada regla al carrito
+                .reduce(new Money(BigDecimal.ZERO, "MXN"), Money::add);
+
+        // se obtiene el total de descuento
+        System.out.println("Total de descuentos aplicados: " + totalDiscount.amount());
+
+        // se resta el total del descuento
+        BigDecimal finalAmount = totalBeforeDiscount.amount().subtract(totalDiscount.amount());
+        System.out.println("TOTAL A PAGAR: " + finalAmount + " MXN");
+    }
 }
