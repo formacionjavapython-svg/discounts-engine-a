@@ -87,6 +87,57 @@ public class Main {
         
         Money totalFinal = cart2.getTotal().subtract(descuentoTotal);
         System.out.println("Total a pagar: $" + totalFinal.getAmount());
+
+        System.out.println("///////////////////////////////////////////////////////////////////////////////");
+
+        System.out.println("=== Motor de Descuentos - con seguridad y eso de secretos ===\n");
+        
+        // se crea el carro
+        Cart cart3 = new Cart();
+        cart3.addItem(new Item("Laptop", new Money(15000, "MXN"), 1));
+        cart3.addItem(new Item("Mouse", new Money(500, "MXN"), 2));
+        cart3.addItem(new Item("Teclado", new Money(800, "MXN"), 1));
+        
+        System.out.println("Carrito original: $" + cart3.getTotal().getAmount());
+        
+        // Se crean las reglas
+        List<DiscountRule> rules2 = Arrays.asList( //
+            new ThresholdDiscount(5000, 0.10),
+            new CouponDiscount(200) 
+        );        
+        // Se aplican descuentos
+        Money descuentoTotal2 = new Money(0, "MXN"); //
+        
+        System.out.println("\n=== Aplicando descuentos ===");
+        for (DiscountRule rule : rules2) {
+            Money descuento = rule.apply(cart3);
+            System.out.println(rule.getClass().getSimpleName() + 
+                             ": $" + descuento.getAmount());
+            descuentoTotal2 = descuentoTotal2.add(descuento);
+        }
+        
+        System.out.println("\n=== Resultados ===");
+        System.out.println("Total original: $" + cart3.getTotal().getAmount());
+        System.out.println("Descuento total: $" + descuentoTotal2.getAmount());
+        
+        Money totalFinal2 = cart3.getTotal().subtract(descuentoTotal2); //
+        System.out.println("Total a pagar: $" + totalFinal2.getAmount());
+        
+        // Prueba la validacion del cupon 
+        System.out.println("\n=== Probando validacion de cupones ===");
+        
+        CouponDiscount cuponRule = (CouponDiscount) rules2.get(1);
+        
+        // Probando con cupón correcto
+        String cuponCorrecto = "SUPER2024";
+        boolean resultado1 = cuponRule.validarCupon(cuponCorrecto);
+        System.out.println("Cupon '" + cuponCorrecto + "' = " + resultado1);
+        
+        // Probando con cupón incorrecto
+        String cuponIncorrecto = "OTRO2024";
+        boolean resultado2 = cuponRule.validarCupon(cuponIncorrecto);
+        System.out.println("Cupon '" + cuponIncorrecto + "' = " + resultado2);
+        
        
     }
 }
