@@ -1,0 +1,38 @@
+name: Java CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "feature/motor-descuentos", "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v3
+
+    - name: Configurar JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Ejecutar Checkstyle (Calidad)
+      run: |
+        mkdir -p scripts
+        curl -L https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.12.4/checkstyle-10.12.4-all.jar -o scripts/checkstyle.jar
+        java -jar scripts/checkstyle.jar -c checkstyle.xml src/main/java/*.java
+
+    - name: Compilar Proyecto y Tests
+      run: |
+        mkdir -p bin
+        javac -d bin src/main/java/*.java src/test/java/*.java
+
+    - name: Ejecutar TestRunner (Pruebas Unitarias)
+      env:        
+        DISCOUNT_COUPON_SECRET: ${{ secrets.DISCOUNT_COUPON_SECRET }}
+      run: |
+        java -cp bin test.java.TestRunner
