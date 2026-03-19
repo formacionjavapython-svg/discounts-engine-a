@@ -38,7 +38,7 @@ public class Item {
         return quantity;
     }
 
-    /* Calcula el subtotal = precio unitario * cantidad   */
+    /* Calcula el subtotal = precio unitario * cantidad */
     public Money getSubtotal() {
         int subtotalAmount = unitPrice.getAmount() * quantity;
         return new Money(subtotalAmount, unitPrice.getCurrency());

@@ -4,9 +4,9 @@
 
 public class Money {
 
-     private final int amount;      
-    private final String currency; 
-    
+    private final int amount;
+    private final String currency;
+
     // Constructor - se valida que no haya valores negativos o nulos
     public Money(int amount, String currency) {
         if (amount < 0) {
@@ -19,16 +19,16 @@ public class Money {
         this.currency = currency;
     }
 
-    //Getters de cantidad y tipo de moneda
-     public int getAmount() {
+    // Getters de cantidad y tipo de moneda
+    public int getAmount() {
         return amount;
     }
-    
+
     public String getCurrency() {
         return currency;
     }
 
-     public Money add(Money other) {
+    public Money add(Money other) {
         if (!this.currency.equals(other.currency)) {
             throw new IllegalArgumentException("No se pueden sumar monedas diferentes");
         }
@@ -43,6 +43,6 @@ public class Money {
             throw new IllegalArgumentException("El descuento no puede ser mayor al total");
         }
         return new Money(this.amount - other.amount, this.currency);
-}
+    }
 
 }

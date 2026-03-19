@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="warning"/>
+    
+    <!-- Estos checks van FUERA de TreeWalker -->
+    <module name="LineLength">
+        <property name="max" value="120"/>
+        <property name="fileExtensions" value="java"/>
+    </module>
+    
+    <!-- TreeWalker contiene los checks que revisan el árbol sintáctico -->
+    <module name="TreeWalker">
+        
+        <!-- Nombres de clases en PascalCase -->
+        <module name="TypeName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+        </module>
+        
+        <!-- Nombres de métodos en camelCase -->
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+        
+        <!-- Constantes en UPPER_CASE -->
+        <module name="ConstantName">
+            <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
+        </module>
+        
+        <!-- Indentación de 4 espacios -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="braceAdjustment" value="0"/>
+            <property name="caseIndent" value="4"/>
+        </module>
+        
+        <!-- Métodos cortos (máx 30 líneas) -->
+        <module name="MethodLength">
+            <property name="max" value="35"/>
+        </module>
+        
+        <!-- Validar que hay espacios alrededor de operadores -->
+        <module name="WhitespaceAround"/>
+        <module name="WhitespaceAfter"/>
+        
+        <!-- Evitar parámetros redundantes -->
+        <module name="ParameterNumber">
+            <property name="max" value="5"/>
+        </module>
+    </module>
+</module>
