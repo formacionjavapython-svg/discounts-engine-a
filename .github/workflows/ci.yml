@@ -2,9 +2,9 @@ name: Java CI Pipeline
 
 on:
   push:
-    branches: [ main, jose-domingo-hernandez-herrera ]
+    branches: [ "main", "jose-domingo-hernandez-herrera" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
@@ -23,14 +23,12 @@ jobs:
       - name: Build with javac
         run: |
           mkdir -p out
-          # Compilamos todo el código fuente
           javac -d out -cp src/main/java src/main/java/**/*.java
 
       - name: Run TestRunner
         env:
           DISCOUNT_COUPON_SECRET: ${{ secrets.DISCOUNT_COUPON_SECRET }}
         run: |
-          # Compilamos y ejecutamos tus pruebas unitarias
           javac -d out -cp src/main/java src/main/java/test/TestRunner.java
           java -cp out test.TestRunner
 
