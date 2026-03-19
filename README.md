@@ -73,6 +73,19 @@ java -cp "out/classes;out/test-classes" TestRunner         # Windows
 
 ---
 
+## Variable de Entorno
+
+El cupon de descuento se valida contra una variable de entorno:
+
+```bash
+export DISCOUNT_COUPON_SECRET="<valor>"    # Linux/Mac
+$env:DISCOUNT_COUPON_SECRET="<valor>"      # PowerShell
+```
+
+Sin esta variable, el descuento por cupon no se aplica pero los tests pasan correctamente.
+
+---
+
 ## Pipeline CI/CD
 
 | Job | Descripcion | Estado |
