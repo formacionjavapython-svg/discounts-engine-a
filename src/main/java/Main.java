@@ -1,4 +1,7 @@
-package model;
+import model.*;
+import service.impl.CouponIDiscount;
+import service.IDiscountRule;
+import service.impl.ThresholdIDiscount;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -7,7 +10,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // se crea el carrito
-        Cart cart = new Cart();
+        Cart cart = new Cart("HOLA2026"); // se crea un carrito agregando un cupon de descuento
 
         // se crean articulos y se añaden al carrito
         cart.addItem(new Item("Laptop", new Money(new BigDecimal("15000.00"), "MXN"), 1));
@@ -17,9 +20,9 @@ public class Main {
         Money totalBeforeDiscount = cart.calculateTotal();
         System.out.println("Total antes de descuentos: " + totalBeforeDiscount.amount() + " " + totalBeforeDiscount.currency());
 
-        List<DiscountRule> rules = Arrays.asList(
-                new ThresholdDiscount(), // Descuento si supera 5000
-                new CouponDiscount()      // Descuento de cupón fijo
+        List<IDiscountRule> rules = Arrays.asList(
+                new ThresholdIDiscount(), // Descuento si supera 5000
+                new CouponIDiscount()      // Descuento de cupón fijo
         );
 
         // verificamos el total del descuento

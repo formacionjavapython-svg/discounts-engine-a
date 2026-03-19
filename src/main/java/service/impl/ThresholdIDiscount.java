@@ -1,9 +1,13 @@
-package model;
+package service.impl;
+
+import model.Cart;
+import model.Money;
+import service.IDiscountRule;
 
 import java.math.BigDecimal;
 
 // descueto por monto minimo
-public class ThresholdDiscount implements DiscountRule{
+public class ThresholdIDiscount implements IDiscountRule {
     private final BigDecimal threshold = new BigDecimal("5000");
     private final BigDecimal discountRate = new BigDecimal("0.10");
 

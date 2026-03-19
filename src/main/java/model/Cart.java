@@ -9,6 +9,12 @@ public class Cart {
     private List<Item> items = new ArrayList<>(); // lista de articulos
     private String appliedCoupon; // cupon a aplicar
 
+    public Cart(String appliedCoupon) {
+        this.appliedCoupon = appliedCoupon;
+    }
+
+    public Cart() {}
+
     public void setApplyCoupon(String code) {
         this.appliedCoupon = code;
     }
