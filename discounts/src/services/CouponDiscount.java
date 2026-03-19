@@ -22,7 +22,7 @@ public class CouponDiscount implements DiscountRule {
     public Money apply(Cart cart) {
         String secret = System.getenv("DISCOUNT_COUPON_SECRET");
         byte[] secretToCompare = secret.getBytes(StandardCharsets.UTF_8);
-        byte[] codigoToCompare = secret.getBytes(StandardCharsets.UTF_8);
+        byte[] codigoToCompare = codigo.getBytes(StandardCharsets.UTF_8);
 
         if(MessageDigest.isEqual(secretToCompare, codigoToCompare)){
             return descuento;
@@ -42,7 +42,4 @@ public class CouponDiscount implements DiscountRule {
         return descuento;
     }
 
-    public void setDescuento(Money descuento) {
-        this.descuento = descuento;
-    }
 }

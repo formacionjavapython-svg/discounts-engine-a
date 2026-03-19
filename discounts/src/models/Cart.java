@@ -5,12 +5,17 @@ import java.util.List;
 
 public class Cart {
 
-    private List<Item> itemsOnCart;
+    private final List<Item> itemsOnCart;
     private Money money;
 
     public Cart(){
         itemsOnCart = new ArrayList<>();
         this.money = new Money(0, "MXN");
+    }
+
+    public Cart(List<Item> itemsOnCart, Money money) {
+        this.itemsOnCart = itemsOnCart;
+        this.money = money;
     }
 
     public List<Item> getItems() {
