@@ -23,7 +23,7 @@ jobs:
       - name: Build with javac
         run: |
           mkdir -p out
-          javac -d out -cp "src/main/java:test" src/main/java/**/*.java test/**/*.java
+          javac -d out -cp "src/main/java:test/test" src/main/java/**/*.java test/java/TestRunner.java
 
       - name: Run TestRunner
         env:
