@@ -38,7 +38,7 @@ public class Item {
      * Metodo que devuelve el subtotal cantidad * [precio
      * @return
      */
-    public Money subtotal(){
+    public Money obtenerSubtotal(){
         return precio.multiplica(new BigDecimal(cantidad));
     }
 }
