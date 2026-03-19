@@ -2,9 +2,9 @@ name: Java CI - Discount Engine
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "feature/a35_victorhugo_ds" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "feature/a35_victorhugo_ds" ]
 
 jobs:
   build-test-quality:
