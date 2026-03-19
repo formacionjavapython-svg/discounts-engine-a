@@ -23,7 +23,8 @@ jobs:
       - name: Build with javac
         run: |
           mkdir -p out
-          javac -d out -cp "src/main/java:src/test/java" "src/main/java/**/*.java" "src/test/java/TestRunner.java"
+          find src -name "*.java" > sources.txt
+          javac -d out -cp "src/main/java:src/test/java" @sources.txt
 
       - name: Ejecutar Checkstyle (Calidad)
         run: |
@@ -34,4 +35,4 @@ jobs:
         env:
           DISCOUNT_COUPON_SECRET: ${{ secrets.DISCOUNT_COUPON_SECRET }}
         run: |
-          java -cp out TestRunner
+          java -cp out test.TestRunner || java -cp out TestRunner
