@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//ES"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<module name="Checker">
+
+    <module name="TreeWalker">
+
+        <!-- Nombres de clases en PascalCase -->
+        <module name="TypeName"/>
+
+        <!-- Nombres de métodos en camelCase -->
+        <module name="MethodName"/>
+
+        <!-- Nombres de constantes en UPPER_CASE -->
+        <module name="ConstantName"/>
+
+        <!-- Nombres de variables en camelCase -->
+        <module name="LocalVariableName"/>
+
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]{1,}$"/>
+            <message key="name.invalidPattern"
+                     value="La variable ''{0}'' debe estar en camelCase y ser descriptiva. Ej: userName, totalPrice"/>
+        </module>
+
+        <module name="MethodLength">
+            <property name="max" value="30"/>
+            <property name="countEmpty" value="false"/>
+            <message key="maxLen.method"
+                     value="El método ''{0}'' tiene {1} líneas. El máximo permitido es 30. Divide la lógica en métodos más pequeños."/>
+        </module>
+
+        <!--  Validando los parametros  -->
+        <module name="ParameterName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]{1,}$"/>
+            <property name="tokens" value="CTOR_DEF"/>
+            <message key="name.invalidPattern"
+                     value="El parámetro ''{0}'' debe estar en camelCase y tener mínimo 2 caracteres. Ej: userName, orderId"/>
+        </module>
+
+        <!-- Sin imports con * -->
+        <module name="AvoidStarImport"/>
+
+        <!-- Sin imports sin usar -->
+        <module name="UnusedImports"/>
+
+        <!-- Máximo de parámetros por método -->
+        <module name="ParameterNumber">
+            <property name="max" value="30"/>
+        </module>
+
+    </module>
+</module>

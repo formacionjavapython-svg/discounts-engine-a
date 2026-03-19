@@ -1,7 +1,5 @@
 package models;
 
-import services.DiscountRule;
-
 public class Money {
     private float money;
     private String type;

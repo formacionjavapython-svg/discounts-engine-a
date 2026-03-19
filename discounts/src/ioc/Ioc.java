@@ -7,8 +7,6 @@ import services.CouponDiscount;
 import services.DiscountRule;
 import services.ThresholdDiscount;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class Ioc {

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="checkstyle-13.3.0-all">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/checkstyle-13.3.0-all.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

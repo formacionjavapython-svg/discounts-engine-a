@@ -1,0 +1,1 @@
+#!/bin/bash CHECKSTYLE_JAR="checkstyle.jar" curl -L -o $CHECKSTYLE_JAR \ https://github.com/.../checkstyle.jar java -jar $CHECKSTYLE_JAR \-c checkstyle.xml src/
