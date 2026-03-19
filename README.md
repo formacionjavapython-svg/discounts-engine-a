@@ -1,2 +1,2 @@
 Laboratorio JAVA Axity
-por Jose Domingo Hernandez Herrera
+por A15_Jose Domingo Hernandez Herrera

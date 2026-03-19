@@ -3,4 +3,7 @@
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="30f12912-7891-4587-8e32-4be9e77c9f1b" />
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="temurin-17 (WSL)" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
 </project>
