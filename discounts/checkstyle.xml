@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE module PUBLIC
-        "-//Checkstyle//DTD Checkstyle Configuration 1.3//ES"
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
         "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
 <module name="Checker">
-
     <module name="TreeWalker">
-
         <!-- Nombres de clases en PascalCase -->
         <module name="TypeName"/>
 
@@ -34,7 +33,6 @@
         <!--  Validando los parametros  -->
         <module name="ParameterName">
             <property name="format" value="^[a-z][a-zA-Z0-9]{1,}$"/>
-            <property name="tokens" value="CTOR_DEF"/>
             <message key="name.invalidPattern"
                      value="El parámetro ''{0}'' debe estar en camelCase y tener mínimo 2 caracteres. Ej: userName, orderId"/>
         </module>
