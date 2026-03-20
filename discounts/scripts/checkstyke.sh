@@ -13,4 +13,4 @@ if [ ! -f "$CHECKSTYLE_JAR" ]; then
     fi
 fi
 
-java -jar "$CHECKSTYLE_JAR" -c checkstyle.xml -r src/
+java -jar "$CHECKSTYLE_JAR" -c discounts/checkstyle.xml -r src/

@@ -40,7 +40,7 @@ public class MotorDescuento {
     }
 
     public void makeSale(){
-        Money descuentoThreshold = Ioc.rules.get("threshold").apply(Ioc.cartSale);
+        Money descuentoThreshold = Ioc.rules.get(0).apply(Ioc.cartSale);
         Ioc.cartSale.applyDiscount(descuentoThreshold);
         System.out.println("Total a pagar con descuento: "+ Ioc.cartSale.getMoney());
         System.out.println("Descuento aplicado: "+descuentoThreshold.getMoney());

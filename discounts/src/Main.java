@@ -1,6 +1,7 @@
 import ioc.Ioc;
 import models.Item;
 import models.Money;
+import services.DiscountRule;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -15,12 +16,11 @@ public class Main {
         Ioc.cartSale.addItem(item2);
         Ioc.cartSale.removeItem(item3);
 
-//        Money descuentoThreshold = Ioc.rules.get("threshold").apply(Ioc.cartSale);
-//        Ioc.cartSale = Ioc.cartSale.applyDiscount(descuentoThreshold);
-
-        Money descuentoCoupon = Ioc.rules.get("coupon").apply(Ioc.cartSale);
-        Ioc.cartSale = Ioc.cartSale.applyDiscount(descuentoCoupon);
-        System.out.println("Total a pagar con descuento: "+ Ioc.cartSale.getMoney().getMoney());
-        System.out.println("Descuento aplicado: "+descuentoCoupon.getMoney());
+        Ioc.rules.forEach( discountRule -> {
+            Money descuento = discountRule.apply(Ioc.cartSale);
+            Ioc.cartSale = Ioc.cartSale.applyDiscount(descuento);
+            System.out.println("Total a pagar con descuento: "+ Ioc.cartSale.getMoney().getMoney());
+            System.out.println("Descuento aplicado: "+descuento.getMoney());
+        });
     }
 }
