@@ -31,6 +31,10 @@ public class Cart {
         items.remove(item);
     }
 
+    /**
+     * MEtodo que calula el total  a pagar en base a un objeto
+     * @return total de tipo Money de clase
+     */
     public Money calcularTotal(){
         Money total = new Money(BigDecimal.valueOf(0), "MXN");
 
