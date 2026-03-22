@@ -1,5 +1,6 @@
 package src.main.java;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,12 +11,6 @@ import java.util.List;
  */
 public class Cart {
     private final List<Item> items = new ArrayList<>();
-    private final String moneda;
-
-    public cart(String moneda){
-        this.moneda = moneda;
-    }
-
     /**
      * MEtodo para agregar items a la lista
      * @param item
@@ -37,9 +32,12 @@ public class Cart {
     }
 
     public Money calcularTotal(){
-        Money subtotal = obtenerSubtotal();
-        Money descuentoTotal = c
-        return subtotal.restarDinero(descuentoTotal);
+        Money total = new Money(BigDecimal.valueOf(0), "MXN");
+
+        for(Item item:items){
+            total = total.sumarDinero(item.obtenerSubtotal());
+        }
+        return total;
     }
 
 }
