@@ -17,7 +17,7 @@ public class ThresholdDiscount implements DiscountRule {
     }
 
     @Override
-    public Money calcularDescuento(Cart carrito){
+    public Money apply(Cart carrito){
         Money total = carrito.calcularTotal();
 
         if((total.getMonto()).compareTo(threshold) >= 0){

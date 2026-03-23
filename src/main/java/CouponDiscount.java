@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 /**
  * Clase para aplicar reglas de cupoines
  */
-public class CouponDiscount {
+public class CouponDiscount implements DiscountRule {
 
     private String cuponUsuario;
 
@@ -14,6 +14,7 @@ public class CouponDiscount {
         this.cuponUsuario = cuponUsuario;
     }
 
+    @Override
     public Money apply(Cart carrito){
         String secreto = System.getenv("DISCOUNT_COUPON_SECRET");
 

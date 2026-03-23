@@ -11,5 +11,5 @@ public interface DiscountRule {
      * @param carrito
      * @return monto
      */
-    Money calcularDescuento(Cart carrito);
+    Money apply(Cart carrito);
 }
